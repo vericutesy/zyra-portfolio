@@ -39,7 +39,6 @@
             position: relative; 
         }
 
-        /* Header Layout */
         header {
             text-align: center;
             border-bottom: 4px dashed var(--main-pink);
@@ -111,7 +110,6 @@
             line-height: 1.4;
         }
 
-        /* Skills Layout */
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -143,7 +141,6 @@
             font-size: 1.1rem;
         }
 
-        /* Projects Grid & Images */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -157,51 +154,95 @@
             position: relative;
             overflow: hidden;
             box-shadow: 4px 4px 0px var(--main-pink);
-            cursor: pointer; /* Shows clickable hand */
-        }
-        
-        .card-img-placeholder {
-            width: 100%;
-            height: 160px;
-            background-color: var(--main-pink);
-            border-bottom: 3px solid var(--hot-pink);
-            object-fit: cover;
-            image-rendering: pixelated;
-            display: block;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
 
+        .card-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-bottom: 3px solid var(--hot-pink);
+        }
+
+        .card-img-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .card-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(168, 50, 90, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .card-img-overlay span {
+            color: white;
+            font-size: 1.3rem;
+            background: var(--hot-pink);
+            padding: 6px 18px;
+            border: 2px solid white;
+            box-shadow: 2px 2px 0px var(--dark-pink);
+            letter-spacing: 1px;
+        }
+
+        .card:hover .card-img-overlay { opacity: 1; }
+        .card:hover .card-img-placeholder { transform: scale(1.04); }
+
         .card-content {
-            padding: 15px;
+            padding: 15px 15px 12px 15px;
         }
 
         .card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--dark-pink);
-            transition: 0.2s;
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0px var(--dark-pink);
         }
-        .card h3 { margin-top: 0; color: var(--dark-pink); font-size: 1.6rem;}
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            color: var(--dark-pink);
+            font-size: 1.6rem;
+            line-height: 1.1;
+        }
+
+        .card p {
+            margin: 0 0 8px 0;
+            line-height: 1.35;
+            font-size: 1.25rem;
+        }
         
         .card-type { 
             font-size: 1rem; 
             background: var(--hot-pink); 
-            padding: 2px 8px; 
+            padding: 3px 10px; 
             color: white;
             position: absolute;
             top: 10px;
             right: 10px;
             border: 2px solid white;
             box-shadow: 2px 2px 0px var(--dark-pink);
+            z-index: 2;
         }
 
         .click-hint {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--hot-pink);
             font-style: italic;
-            margin-top: 10px;
+            margin-top: 6px;
             display: block;
         }
 
-        /* Experience Box */
         .exp-box {
             border: 2px dashed var(--hot-pink);
             padding: 20px;
@@ -231,7 +272,7 @@
             box-shadow: 4px 4px 0px var(--dark-pink);
             cursor: pointer;
             font-size: 1.3rem;
-            transition: 0.2s;
+            transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
         }
         .btn:hover { 
             background: var(--dark-pink); 
@@ -239,74 +280,172 @@
             box-shadow: 6px 6px 0px var(--hot-pink);
         }
 
-        /* === NEW: MODAL (POPUP) STYLES === */
         .modal {
-            display: none; /* Hidden by default */
+            display: none;
             position: fixed; 
             z-index: 100; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0,0,0,0.7); 
-            overflow: auto;
-            backdrop-filter: blur(3px);
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.82); 
+            backdrop-filter: blur(4px);
+            animation: modalFadeIn 0.22s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
         }
 
         .modal-content {
             background-color: #fff0f5;
-            margin: 5% auto;
-            padding: 20px;
+            margin: 4% auto;
+            padding: 24px 24px 20px 24px;
             border: 4px solid var(--hot-pink);
-            box-shadow: var(--pixel-shadow);
-            width: 90%;
-            max-width: 700px;
-            text-align: center;
+            box-shadow: 8px 8px 0px var(--dark-pink);
+            width: 92%;
+            max-width: 720px;
             position: relative;
+            animation: modalSlideUp 0.24s ease;
+        }
+
+        @keyframes modalSlideUp {
+            from { transform: translateY(28px); opacity: 0.4; }
+            to   { transform: translateY(0);    opacity: 1;   }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px dashed var(--main-pink);
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            color: var(--dark-pink);
+            margin: 0;
+            font-size: 1.8rem;
+            line-height: 1;
         }
 
         .close-btn {
             color: var(--dark-pink);
-            float: right;
-            font-size: 40px;
+            font-size: 36px;
             font-weight: bold;
             cursor: pointer;
-            line-height: 20px;
+            line-height: 1;
+            background: none;
+            border: none;
+            font-family: 'VT323', monospace;
+            padding: 0 4px;
+            transition: color 0.15s;
         }
-
         .close-btn:hover { color: var(--hot-pink); }
 
-        .modal-title {
-            color: var(--dark-pink);
-            margin-bottom: 20px;
-            border-bottom: 2px dashed var(--main-pink);
-            padding-bottom: 10px;
-        }
-
-        /* Style for images inside the modal */
-        .gallery-img {
-            width: 100%;
-            margin-bottom: 15px;
+        .modal-img-area {
+            position: relative;
+            background: var(--light-pink);
             border: 2px solid var(--main-pink);
-            box-shadow: 2px 2px 0px var(--dark-pink);
+            box-shadow: 3px 3px 0px var(--main-pink);
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        /* Error message style if image is missing */
-        .img-error {
-            background: #ffe6ea;
+        #modalMainImg {
+            max-width: calc(100% - 100px);
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+
+        #modalMainImg.switching {
+            opacity: 0;
+            transform: scale(0.97);
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--hot-pink);
+            color: white;
+            border: 3px solid var(--dark-pink);
+            box-shadow: 3px 3px 0px var(--dark-pink);
+            width: 42px;
+            height: 42px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            font-family: 'VT323', monospace;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            transition: background 0.15s;
+            user-select: none;
+            flex-shrink: 0;
+        }
+        .nav-btn:hover {
+            background: var(--dark-pink);
+        }
+        .nav-btn.prev { left: 10px; }
+        .nav-btn.next { right: 10px; }
+
+        .modal-footer-strip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .modal-counter {
+            font-size: 1.1rem;
             color: var(--dark-pink);
-            padding: 20px;
-            border: 1px dashed var(--dark-pink);
-            margin-bottom: 10px;
-            font-family: sans-serif;
-            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .modal-thumbs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .modal-thumb {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border: 2px solid var(--main-pink);
+            cursor: pointer;
+            opacity: 0.65;
+            transition: opacity 0.15s, border-color 0.15s, transform 0.15s;
+            flex-shrink: 0;
+        }
+        .modal-thumb:hover { opacity: 1; transform: scale(1.08); }
+        .modal-thumb.active {
+            border-color: var(--hot-pink);
+            border-width: 3px;
+            opacity: 1;
+            box-shadow: 2px 2px 0px var(--dark-pink);
         }
 
         @media (max-width: 600px) {
             h1 { font-size: 3rem; }
-            .container { padding: 15px; margin-top: 80px;}
+            .container { padding: 15px; margin-top: 80px; }
             header { padding-top: 70px; }
-            .pixel-avatar { width: 120px; height: 120px; top: -60px;}
+            .pixel-avatar { width: 120px; height: 120px; top: -60px; }
+            .modal-content { padding: 14px 12px; margin: 8% auto; }
+            .modal-img-area { height: 280px; }
+            #modalMainImg { max-width: calc(100% - 80px); }
+            .nav-btn { width: 34px; height: 34px; font-size: 1.3rem; }
+            .modal-thumb { width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -372,20 +511,68 @@
 
         <div class="section-title">PROJECTS 📂</div>
         <div class="project-grid">
-            
+
+            <!-- Calcutesy — FIRST -->
+            <div class="card" onclick="openGallery('calcutesy')">
+                <div class="card-img-wrapper">
+                    <img src="calcutesy.png"
+                         class="card-img-placeholder"
+                         alt="Calcutesy Calculator"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=Calcutesy&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
+                <span class="card-type">Web App</span>
+                <div class="card-content">
+                    <h3>🧮 Calcutesy</h3>
+                    <p>A cute pink-themed calculator web app with keyboard shortcuts and save history feature.</p>
+                    <small><strong>Tools:</strong> HTML, CSS, JavaScript</small>
+                    <span class="click-hint">Click to view gallery</span>
+                </div>
+            </div>
+
+            <!-- Digital Love Letter — SECOND -->
+            <div class="card" onclick="openGallery('digitalloveletter')">
+                <div class="card-img-wrapper">
+                    <img src="digital-love-letter2.png"
+                         class="card-img-placeholder"
+                         alt="Digital Love Letter"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=Digital+Love+Letter&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
+                <span class="card-type">Web Design</span>
+                <div class="card-content">
+                    <h3>💌 Digital Love Letter</h3>
+                    <p>An interactive love letter web experience with a tap-to-unfold animation and floating hearts.</p>
+                    <small><strong>Tools:</strong> HTML, CSS, JavaScript</small>
+                    <span class="click-hint">Click to view gallery</span>
+                </div>
+            </div>
+
             <div class="card" onclick="openGallery('flavorduo')">
-                <img src="https://placehold.co/600x400/ffb7c5/a8325a?text=FlavorDuo+App&font=roboto" class="card-img-placeholder">
+                <div class="card-img-wrapper">
+                    <img src="flavorduo-onboarding.jpg"
+                         class="card-img-placeholder"
+                         alt="FlavorDuo Onboarding"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=FlavorDuo+App&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
                 <span class="card-type">Android App</span>
                 <div class="card-content">
                     <h3>🍰 FlavorDuo</h3>
                     <p>A simple cupcake shop app focused on menu browsing and UI presentation.</p>
                     <small><strong>Tools:</strong> Android Studio, Java</small>
-                    <span class="click-hint">Click to view details</span>
+                    <span class="click-hint">Click to view gallery</span>
                 </div>
             </div>
 
             <div class="card" onclick="openGallery('pawfectmatch')">
-                 <img src="https://placehold.co/600x400/ffb7c5/a8325a?text=PawfectMatch+UI&font=roboto" class="card-img-placeholder">
+                <div class="card-img-wrapper">
+                    <img src="pawfectmatch-ui.png"
+                         class="card-img-placeholder"
+                         alt="PawfectMatch UI"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=PawfectMatch+UI&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
                 <span class="card-type">App + Web Admin</span>
                 <div class="card-content">
                     <h3>🐾 PawfectMatch</h3>
@@ -396,7 +583,13 @@
             </div>
 
             <div class="card" onclick="openGallery('staygo')">
-                 <img src="https://placehold.co/600x400/ffb7c5/a8325a?text=StayGo+Booking&font=roboto" class="card-img-placeholder">
+                <div class="card-img-wrapper">
+                    <img src="staygo-admin-login.png"
+                         class="card-img-placeholder"
+                         alt="StayGo Admin Login"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=StayGo+Booking&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
                 <span class="card-type">Booking System</span>
                 <div class="card-content">
                     <h3>🏨 StayGo</h3>
@@ -407,7 +600,13 @@
             </div>
 
             <div class="card" onclick="openGallery('burgerksakin')">
-                 <img src="https://placehold.co/600x400/ffb7c5/a8325a?text=BurgerKsakin+App&font=roboto" class="card-img-placeholder">
+                <div class="card-img-wrapper">
+                    <img src="burgerksakin-admin-onboarding.png"
+                         class="card-img-placeholder"
+                         alt="BurgerKsakin Onboarding"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=BurgerKsakin+App&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
                 <span class="card-type">Ordering App</span>
                 <div class="card-content">
                     <h3>🍔 BurgerKsakin</h3>
@@ -416,6 +615,41 @@
                     <span class="click-hint">Click to view gallery</span>
                 </div>
             </div>
+
+            <div class="card" onclick="openGallery('digitalinvitation')">
+                <div class="card-img-wrapper">
+                    <img src="digital-invitation1.png"
+                         class="card-img-placeholder"
+                         alt="Digital Invitation"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=Digital+Invitation&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
+                <span class="card-type">Digital Design</span>
+                <div class="card-content">
+                    <h3>💌 Digital Invitation</h3>
+                    <p>Beautiful digital invitations designed for events, viewable on mobile and desktop.</p>
+                    <small><strong>Tools:</strong> Figma, Canva</small>
+                    <span class="click-hint">Click to view gallery</span>
+                </div>
+            </div>
+
+            <div class="card" onclick="openGallery('uiuxsystem')">
+                <div class="card-img-wrapper">
+                    <img src="UIUX-greensystem.png"
+                         class="card-img-placeholder"
+                         alt="UI/UX Green System"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=UI/UX+Design&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
+                <span class="card-type">UI/UX Design</span>
+                <div class="card-content">
+                    <h3>🎨 UI/UX System Design</h3>
+                    <p>Design system collections featuring cohesive color themes — green, blue, and violet.</p>
+                    <small><strong>Tools:</strong> Figma</small>
+                    <span class="click-hint">Click to view gallery</span>
+                </div>
+            </div>
+
         </div>
 
         <div class="section-title">EXPERIENCE 💼</div>
@@ -468,22 +702,60 @@
         </footer>
     </div>
 
-    <div id="projectModal" class="modal">
+    <!-- MODAL -->
+    <div id="projectModal" class="modal" onclick="handleModalBackdropClick(event)">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle" class="modal-title">Project Gallery</h2>
-            <div id="modalImagesContainer">
-                </div>
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title">Project Gallery</h2>
+                <button class="close-btn" onclick="closeModal()" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="modal-img-area">
+                <button class="nav-btn prev" onclick="navigateModal(-1)" aria-label="Previous">&#9664;</button>
+                <img id="modalMainImg" src="" alt="Project screenshot">
+                <button class="nav-btn next" onclick="navigateModal(1)" aria-label="Next">&#9654;</button>
+            </div>
+
+            <div class="modal-footer-strip">
+                <div id="modalCounter" class="modal-counter">1 / 1</div>
+                <div id="modalThumbs" class="modal-thumbs"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Data: Lists of images for each project
         const projectData = {
+            'calcutesy': {
+                title: 'Calcutesy (Web App)',
+                images: [
+                    'calcutesy.png'
+                ]
+            },
+            'digitalloveletter': {
+                title: 'Digital Love Letter',
+                images: [
+                    'digital-love-letter1.png',
+                    'digital-love-letter2.png'
+                ]
+            },
+            'flavorduo': {
+                title: 'FlavorDuo (Android App)',
+                images: [
+                    'flavorduo-onboarding.jpg',
+                    'flavorduo-login.jpg',
+                    'flavorduo-signup.jpg',
+                    'flavorduo-home.jpg',
+                    'flavorduo-scroll.jpg',
+                    'flavorduo-cupcakechoices.jpg',
+                    'flavorduo-drinkchoices.jpg',
+                    'flavorduo-checkout.jpg',
+                    'flavorduo-logout.jpg'
+                ]
+            },
             'pawfectmatch': {
                 title: 'PawfectMatch (UI & Admin)', 
                 images: [
-                    'pawfectmatch-ui.png', // <--- ADDED HERE
+                    'pawfectmatch-ui.png',
                     'pawfectmatch-admin-login.png',
                     'pawfectmatch-admin-dashboard.png',
                     'pawfectmatch-admin-addpet.png',
@@ -519,61 +791,111 @@
                     'burgerksakin-admin-logout.png'
                 ]
             },
-            'flavorduo': {
-                title: 'FlavorDuo',
-                images: [] // Empty for now, will show "Coming Soon"
+            'digitalinvitation': {
+                title: 'Digital Invitation',
+                images: [
+                    'digital-invitation1.png',
+                    'digital-invitation2.png',
+                    'digital-invitation3.png',
+                    'digital-invitation-inphone1.png',
+                    'digital-invitation-inphone2.png',
+                    'digital-invitation-inphone3.png'
+                ]
+            },
+            'uiuxsystem': {
+                title: 'UI/UX System Design',
+                images: [
+                    'UIUX-greensystem.png',
+                    'UIUX-bluesystem1.png',
+                    'UIUX-bluesystem2.png',
+                    'UIUX-violetsystem.png'
+                ]
             }
         };
 
+        let currentImages = [];
+        let currentIndex  = 0;
+
         function openGallery(projectId) {
-            const modal = document.getElementById('projectModal');
-            const container = document.getElementById('modalImagesContainer');
-            const title = document.getElementById('modalTitle');
-            
-            // Clear previous images
-            container.innerHTML = '';
-            
             const data = projectData[projectId];
-            title.innerText = data.title;
+            currentImages = data.images;
+            currentIndex  = 0;
 
-            if (data.images.length > 0) {
-                // Loop through images and create img tags
-                data.images.forEach(filename => {
-                    const img = document.createElement('img');
-                    img.src = filename;
-                    img.className = 'gallery-img';
-                    img.alt = filename;
-                    
-                    // If image fails to load (file missing), show a text box instead
-                    img.onerror = function() {
-                        this.style.display = 'none';
-                        const errorMsg = document.createElement('div');
-                        errorMsg.className = 'img-error';
-                        errorMsg.innerHTML = '⚠️ Image not found: <strong>' + filename + '</strong><br><small>Make sure this file is in your folder!</small>';
-                        container.appendChild(errorMsg);
-                    };
-                    
-                    container.appendChild(img);
-                });
-            } else {
-                // If no images (FlavorDuo)
-                container.innerHTML = '<p style="font-size:1.5rem;">📸 Images coming soon!</p>';
-            }
+            document.getElementById('modalTitle').innerText = data.title;
+            buildThumbs();
+            showImage(0);
 
-            modal.style.display = "block";
+            document.getElementById('projectModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            document.getElementById('projectModal').style.display = "none";
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = '';
         }
 
-        // Close modal if user clicks outside the box
-        window.onclick = function(event) {
-            const modal = document.getElementById('projectModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+        function handleModalBackdropClick(e) {
+            if (e.target === document.getElementById('projectModal')) closeModal();
         }
+
+        function navigateModal(dir) {
+            const total = currentImages.length;
+            currentIndex = (currentIndex + dir + total) % total;
+            showImage(currentIndex);
+        }
+
+        function showImage(idx) {
+            currentIndex = idx;
+            const img = document.getElementById('modalMainImg');
+
+            img.classList.add('switching');
+            setTimeout(() => {
+                img.src = currentImages[idx];
+                img.alt = currentImages[idx];
+
+                img.onerror = function () {
+                    this.src = 'https://placehold.co/700x420/ffe6ea/a8325a?text=Image+Not+Found&font=roboto';
+                };
+
+                img.classList.remove('switching');
+                updateCounter();
+                updateThumbs();
+            }, 160);
+        }
+
+        function updateCounter() {
+            document.getElementById('modalCounter').innerText =
+                (currentIndex + 1) + ' / ' + currentImages.length;
+        }
+
+        function buildThumbs() {
+            const strip = document.getElementById('modalThumbs');
+            strip.innerHTML = '';
+            currentImages.forEach((src, i) => {
+                const t = document.createElement('img');
+                t.src       = src;
+                t.alt       = src;
+                t.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+                t.onclick   = () => showImage(i);
+                t.onerror   = function () { this.style.display = 'none'; };
+                strip.appendChild(t);
+            });
+        }
+
+        function updateThumbs() {
+            const thumbs = document.querySelectorAll('.modal-thumb');
+            thumbs.forEach((t, i) => {
+                t.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            const modal = document.getElementById('projectModal');
+            if (modal.style.display !== 'block') return;
+            if (e.key === 'ArrowLeft')  navigateModal(-1);
+            if (e.key === 'ArrowRight') navigateModal(1);
+            if (e.key === 'Escape')     closeModal();
+        });
     </script>
 
 </body>
