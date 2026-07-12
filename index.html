@@ -319,6 +319,8 @@
             border-bottom: 2px dashed var(--main-pink);
             padding-bottom: 10px;
             margin-bottom: 16px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .modal-title {
@@ -326,6 +328,18 @@
             margin: 0;
             font-size: 1.8rem;
             line-height: 1;
+        }
+
+        .modal-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-live-link {
+            font-size: 1rem;
+            padding: 6px 14px;
+            box-shadow: 2px 2px 0px var(--dark-pink);
         }
 
         .close-btn {
@@ -459,7 +473,7 @@
             <div class="subtitle">Freelance Android & Web Developer | UI/UX Designer</div>
             
             <div class="edu-badge">
-                <i class="fas fa-graduation-cap"></i> 3rd Year BSIT @ Pamantasan ng Lungsod ng Muntinlupa
+                <i class="fas fa-graduation-cap"></i> 4th Year BSIT @ Pamantasan ng Lungsod ng Muntinlupa
             </div>
             
             <div style="margin-top: 25px;">
@@ -470,7 +484,7 @@
 
         <div class="intro-box">
             <p style="margin: 0;">
-                <strong>Hello!</strong> I'm Zyra, a passionate 3rd-year BSIT student at <strong>Pamantasan ng Lungsod ng Muntinlupa (PLMun)</strong>. 
+                <strong>Hello!</strong> I'm Zyra, a passionate 4th-year BSIT student at <strong>Pamantasan ng Lungsod ng Muntinlupa (PLMun)</strong>, currently working on my capstone project. 
                 <br><br>
                 Even though I'm still studying, I love turning creative ideas into reality! I specialize in building Android apps, designing cute interfaces, and crafting simple websites. I'm always eager to learn new things and help clients bring their visions to life with a touch of creativity.
             </p>
@@ -633,6 +647,40 @@
                 </div>
             </div>
 
+            <div class="card" onclick="openGallery('liambirthday1')">
+                <div class="card-img-wrapper">
+                    <img src="liambirthday-digital-invitation11.png"
+                         class="card-img-placeholder"
+                         alt="Liam's Birthday Invitation - Shark Edition"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=Liam%27s+Birthday+Invite&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
+                <span class="card-type">Interactive Invitation</span>
+                <div class="card-content">
+                    <h3>Liam's Birthday Invitation — Shark Edition</h3>
+                    <p>An animated shark-themed digital birthday invitation with a fully scripted animation sequence, built and hosted live for the celebrant.</p>
+                    <small><strong>Tools:</strong> HTML, CSS, JavaScript</small>
+                    <span class="click-hint">Click to view gallery</span>
+                </div>
+            </div>
+
+            <div class="card" onclick="openGallery('liambirthday2')">
+                <div class="card-img-wrapper">
+                    <img src="liambirthday-digital-invitation1.png"
+                         class="card-img-placeholder"
+                         alt="Liam's Birthday Invitation - Premium Edition"
+                         onerror="this.src='https://placehold.co/600x400/ffb7c5/a8325a?text=Liam%27s+Birthday+Invite&font=roboto'">
+                    <div class="card-img-overlay"><span>📸 VIEW GALLERY</span></div>
+                </div>
+                <span class="card-type">Premium Animated Invitation</span>
+                <div class="card-content">
+                    <h3>Liam's Birthday Invitation — Premium Edition</h3>
+                    <p>A two-page premium animated invitation: a text-and-button landing page that reveals a fully animated details page with all event information.</p>
+                    <small><strong>Tools:</strong> HTML, CSS, JavaScript</small>
+                    <span class="click-hint">Click to view gallery</span>
+                </div>
+            </div>
+
             <div class="card" onclick="openGallery('uiuxsystem')">
                 <div class="card-img-wrapper">
                     <img src="UIUX-greensystem.png"
@@ -664,11 +712,11 @@
         </div>
         <div class="exp-box">
             <h3>📝 Assessment Scoring Assistant</h3>
-            <span class="exp-role">Current | Part-Time (Contracted)</span>
+            <span class="exp-role">Contract Completed | Part-Time</span>
             <ul>
-                <li>Responsible for scoring respondent outputs ensuring accuracy.</li>
-                <li>Working under supervision to maintain data quality.</li>
-                <li>Strict adherence to scoring guidelines and confidentiality.</li>
+                <li>Scored respondent outputs on a testing platform, ensuring accuracy and consistency.</li>
+                <li>Worked under supervision to maintain data quality across scoring cycles.</li>
+                <li>Followed strict scoring guidelines and confidentiality standards.</li>
             </ul>
         </div>
         <div class="exp-box">
@@ -707,7 +755,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle" class="modal-title">Project Gallery</h2>
-                <button class="close-btn" onclick="closeModal()" aria-label="Close">&times;</button>
+                <div class="modal-header-actions">
+                    <a id="modalLiveLink" href="#" target="_blank" class="btn modal-live-link" style="display:none;">🔗 View Live</a>
+                    <button class="close-btn" onclick="closeModal()" aria-label="Close">&times;</button>
+                </div>
             </div>
 
             <div class="modal-img-area">
@@ -802,6 +853,32 @@
                     'digital-invitation-inphone3.png'
                 ]
             },
+            'liambirthday1': {
+                title: "Liam's Birthday Invitation — Shark Edition",
+                images: [
+                    'liambirthday-digital-invitation11.png',
+                    'liambirthday-digital-invitation22.png',
+                    'liambirthday-digital-invitation33.png',
+                    'liambirthday-digital-invitation44.png',
+                    'liambirthday-digital-invitation55.png',
+                    'liambirthday-digital-invitation66.png'
+                ],
+                liveLink: 'https://vericutesy.github.io/JaredLian2ndBirthday/'
+            },
+            'liambirthday2': {
+                title: "Liam's Birthday Invitation — Premium Edition",
+                images: [
+                    'liambirthday-digital-invitation1.png',
+                    'liambirthday-digital-invitation2.png',
+                    'liambirthday-digital-invitation3.png',
+                    'liambirthday-digital-invitation4.png',
+                    'liambirthday-digital-invitation5.png',
+                    'liambirthday-digital-invitation6.png',
+                    'liambirthday-digital-invitation7.png',
+                    'liambirthday-digital-invitation8.png',
+                    'liambirthday-digital-invitation9.png'
+                ]
+            },
             'uiuxsystem': {
                 title: 'UI/UX System Design',
                 images: [
@@ -822,6 +899,15 @@
             currentIndex  = 0;
 
             document.getElementById('modalTitle').innerText = data.title;
+
+            const liveLinkBtn = document.getElementById('modalLiveLink');
+            if (data.liveLink) {
+                liveLinkBtn.href = data.liveLink;
+                liveLinkBtn.style.display = 'inline-block';
+            } else {
+                liveLinkBtn.style.display = 'none';
+            }
+
             buildThumbs();
             showImage(0);
 
